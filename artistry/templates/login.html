@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static '1.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>DEUO</title>
+
+    <style>
+        .login {
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+          }
+          .messages {
+            margin-top: 10px;
+            text-align: center;
+          }
+        
+          .message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-weight: bold;
+          }
+        
+          .message.success {
+            background-color: #4CAF50;
+            color: #FFFFFF;
+          }
+        
+          .message.error {
+            background-color: #F44336;
+            color: #FFFFFF;
+          }
+        
+          .my-custom-class {
+            background-color: #f8f9fa;
+            color: #212529;
+            
+        }
+        
+          .message.warning {
+            background-color: #FF9800;
+            color: #FFFFFF;
+          }
+    </style>
+</head>
+<body class="login">
+
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+{% endif %}
+
+    <div class="box">
+        <div class="container">
+            <div class="top-header">
+                <span>Let's Go With Your PASSION</span>
+                <header>LOGIN</header>
+            </div>
+            
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div class="input-field">
+                <input type="text" class="input" placeholder="Username" required name="name">
+                <i class="fa fa-user-circle-o" style="font-size: 19px;display: inline-block;width: 0px;"></i>
+
+            </div>
+
+
+            <div class="input-field">
+                <input type="password" class="input" placeholder="Password"  name="pass" required>
+                <i class="fa fa-lock" style="font-size: 19px;display: inline-block;width: 0px;"></i>
+                
+                
+            </div>
+
+
+            <div class="input-field">
+                <input type="submit" class="submit" value="login">
+            </div>
+        </form>
+            <div class="bottom">
+                <div class="left">
+                    
+                    <label><a href="/e_verify">If you are new user</a></label>
+                </div>
+                <div class="right">
+                    <label><a href="passwordreset">Forget Password?</a></label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+   
+    var closeButtons = document.querySelectorAll(".alert .close");
+
+    
+    closeButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+       
+        var alertDiv = this.parentElement;
+
+    
+        alertDiv.classList.add("fade");
+
+        
+        setTimeout(function() {
+          alertDiv.remove();
+        }, 500);
+      });
+    });
+  });
+
+</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

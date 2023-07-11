@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+* {
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+
+.cancelbtn, .signupbtn {
+  width: 50%;
+  position: relative;
+   
+}
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+</style>
+<body>
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  {% endfor %}
+{% endif %}
+
+
+
+{% if type == 1 %}
+<form action="/e_verify" style="border:1px solid #ccc" method="POST">
+    {% csrf_token %}
+  <div class="container">
+    <h1>EMAIL VERIFICATION</h1>
+    <p>Please fill your email id to verify email.</p>
+    <hr>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+
+    
+   
+    
+    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+      <a href="/"><button  type="button" class="cancelbtn" >Cancel</button> </a>
+      <button type="submit" class="signupbtn" name="btn" value="1">SUBMIT</button>
+    </div>
+  </div>
+</form>
+{% elif type == 2 %}
+<form action="/e_verify" style="border:1px solid #ccc" method="POST">
+    {% csrf_token %}
+  <div class="container">
+    <h1>ENTER OTP</h1>
+    <p>Please fill otp field to verify email.</p>
+    <hr>
+
+    <label for="email"><b>Enter OTP</b></label>
+    <input type="text" placeholder="Enter OTP" name="otp" required>
+
+
+    <div class="clearfix">
+      <a href="/"><button  type="button" class="cancelbtn">Cancel</button> </a>
+      <button type="submit" class="signupbtn" name="btn" value="2">SUBMIT</button>
+    </div>
+  </div>
+</form>
+{% endif %}
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+   
+    var closeButtons = document.querySelectorAll(".alert .close");
+
+    
+    closeButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+       
+        var alertDiv = this.parentElement;
+
+    
+        alertDiv.classList.add("fade");
+
+        
+        setTimeout(function() {
+          alertDiv.remove();
+        }, 500);
+      });
+    });
+  });
+
+</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

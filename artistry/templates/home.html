@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ITS MYNE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{%static '3.css' %}">
+
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          margin: 0;
+        }
+        
+        html {
+          box-sizing: border-box;
+        }
+        
+        *, *:before, *:after {
+          box-sizing: inherit;
+        }
+        
+        .column {
+          float: left;
+          width: 33.3%;
+          margin-bottom: 16px;
+          padding: 0 8px;
+        }
+        
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          margin: 8px;
+        }
+        
+        .about-section {
+          padding: 30px;
+          text-align: center;
+          background-color: #474e5d;
+          color: white;
+        }
+        
+        .container {
+          padding: 0 16px;
+        }
+        
+        .container::after, .row::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+        
+        .title {
+          color: grey;
+        }
+        
+        .button {
+          border: none;
+          outline: 0;
+          display: inline-block;
+          padding: 8px;
+          color: white;
+          background-color: #000;
+          text-align: center;
+          cursor: pointer;
+          width: 100%;
+        }
+        
+        .button:hover {
+          background-color: #555;
+        }
+        
+        @media screen and (max-width: 650px) {
+          .column {
+            width: 100%;
+            display: block;
+          }
+        }
+        </style>
+</head>
+<body>
+    <header>
+        
+        <nav>
+            {% block nav %}
+            <img class="koushik" style="height: 90px; width: 80px;" src="{% static 'My project (10).png' %}" alt="">
+            <div class="logo">
+                <h5>ARTI<span>STRI</span></h5>
+            </div>
+            <ul class="menu">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="contact">CONTACT</a></li>
+                
+            </ul>
+            <div class="bar">
+                <div class="bar-1"></div>
+                <div class="bar-2"></div>
+                <div class="bar-3"></div>
+            </div>
+            {% endblock nav %}
+        </nav>
+    </header>
+    <div class="banner">
+        <div class="wrapper">
+            <div class="content">
+                <h2>ARTISTRI</h2>
+                <p>"LET's EMBRACE YOUR CREATIVE THINGS WITH PASSION AND GO!"</p>
+
+                <a href="e_verify">Register</a>
+                <a href="login">Login</a>
+
+                <h5 class="socials">
+                    <i class="fa fa-facebook"></i>
+                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-instagram"></i>
+                    <i class="fa fa-youtube"></i>
+                </h5>
+                
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="about-section" id="about">
+        <h1>About Us..,</h1>
+        <p> Artistry is a web-based social media plaform that empower users to express themselves through different media by allowing users to create and share creative photographs, and articles, the website can provide a holistic platform for creative expression that caters to diverse interests and skill sets. The website can provide resources and opportunities for users to learn new techniques, receive feedback from experts, and participate in challenges and contests to improve their skills.  
+        </p>
+        
+      </div>
+      
+      <h2 style="text-align:center">Our Team</h2>
+      <div class="row">
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'IMG_20230507_091329513.jpg' %}" alt="SANDEEP" style="width:75%">
+            <div class="container">
+              <h2>Sandeep</h2>
+              <p class="title">Devoloper</p>
+              <p>Ampar Kundapura</p>
+              <p>sandeepkotari60@gmail.com</p>
+             
+            </div>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'purna.jpg' %}" alt="PURNESH" style="width:75%">
+            <div class="container">
+              <h2>Purnesh kumar</h2>
+              <p class="title">Art Director/Designer</p>
+              <p>Ampar Kundapura</p>
+              <p>purneshkumarhegde471@gmail.com</p>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="column">
+          <div class="card">
+            <img src="{% static '174531.JPEG.jpg' %}" alt="SANATH" style="width:75%">
+            <div class="container">
+              <h2>Sanath</h2>
+              <p class="title">CEO & Founder</p>
+              <p>Ampar Kundapura</p>
+              <p>sanathpbailur@gmail.com</p>
+              {% comment %} <p><button class="button">Contact</button></p> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  
+    
+    
+    <script>
+        const sidenav = () => {
+            const menu = document.querySelector('.bar');
+            const nav = document.querySelector('.menu');
+            
+            menu.addEventListener('click', () => {
+               menu.classList.toggle('bar-active');
+                nav.classList.toggle('nav-active');
+            });
+        }
+        sidenav();
+    </script>
+</body>
+</html>
+

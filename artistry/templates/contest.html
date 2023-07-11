@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .bbhc{
+      text-align: center;
+    }
+  </style>
+  <title>Competition Payment</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=AWJ5kTKVyMKUy_luE4mDgQiDw5ywJuqUbElKbmhfu0NMcQykAllW1hGYC-QNhQ9I9m9bj_A3-6Rwy-ze&currency=USD"></script>
+  <script>
+    
+    paypal.Buttons({
+
+        
+        createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '10.00' 
+                }
+              }]
+            });
+          },
+
+        
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details){
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+              document.getElementById("myform").submit();
+            });
+        }
+
+    }).render('#paypal-button-container');
+  </script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body style="background-color: aqua;">
+  <div class="bbhc">
+  <h1>Register to CONTEST</h1>
+  <P>NOTHING IN THE WAY OF CREATIVITY</P>
+  <br>
+  <p>Enter the valied details and join to contest and 🏆 win exiting cash price🥇🥈🥉</p>
+  <h2>ENTREE FEE💲 = 10.00$</h2>
+  <h2>Winning Amount = 100.00$</h2>
+  
+  <h3>YOU MUST ENTER THE USERNAME AND EMAIL-ID IN Description.</h3>
+<br>
+<br>
+  <form method="POST" action="" enctype="multipart/form-data" id="myform">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="attachment">Select Image:</label>
+      <input type="file" id="attachment" name="attachment" required>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea>
+    </div>
+  </div>
+    <div id="paypal-button-container"></div>
+  </form>
+</body>
+</html>
+

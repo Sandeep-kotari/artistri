@@ -1,0 +1,430 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        padding-top: 70px;
+      }
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgb(0 0 0);
+}
+
+      .card {
+        background-color: #ececec;
+      }
+      
+      .btn btn-primary mb-3{
+         
+         width: 105px;
+      }
+
+      .navbar-dark .navbar-nav .nav-link {
+        color: #fff;
+      }    
+      .thumbs-up {
+        color: gray;
+        cursor: pointer;
+      }
+      .clicked {
+        color: #00deff;
+        cursor: pointer;
+      }
+
+      .custom{
+        vertical-align: middle;
+        border-style: none;
+        height: 200px;
+        width: 200px;
+    }
+  
+    .dropbtn {
+      background-color: #333b43;
+      color: white;
+      padding: 11px;
+      font-size: 16px;
+      border: none;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {background-color: #ddd;}
+    
+    .dropdown:hover .dropdown-content {display: block;}
+    
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#"
+        ><img
+          src="{% static 'My project (10).png' %}"
+          alt=""
+          width="50"
+          height="50"
+          class="d-inline-block align-text-top"
+        />ARTISTRY</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          
+
+
+          <div class="dropdown">
+            <button class="dropbtn">POST</button>
+            <div class="dropdown-content">
+              <a href="/create/">PHOTOGRAPHY</a>
+              <a href="/article">ARTICLE</a>
+              
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="dropdown">
+            <button class="dropbtn">SETTINGS</button>
+            <div class="dropdown-content">
+              <a href="contest">Join Contest</a>
+              <a href="/help/">Help</a>
+              <a href="/contact/">Contact us</a>
+              <a href="/signout">Logout</a>
+            </div>
+          </div>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/user_home">HOME</a>
+          </li>
+          
+          
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-41" style="text-align: center">
+          {% if request.user.profile_photo %}
+          <img
+            id="profile_picture"
+            src="{{ request.user.profile_photo.url }}"
+            alt="Profile Picture"
+            class="profile-img"
+          />
+          {% else %}
+          <img src="{% static 'art.png' %}" alt="" class="profile-img">
+          {% endif %}
+        </div>
+        
+        <div class="col-md-8">
+          <h2>{{ request.user.first_name }}</h2>
+          <ul class="list-unstyled">
+            <li><strong>USER_NAME :</strong>{{ request.user.username }}</li>
+            {% comment %} <li><strong>Class:</strong>{{ request.user.classname }}</li> {% endcomment %}
+            <li><strong>Email :</strong>{{ request.user.email }}</li>
+          </ul>
+          <p>
+                <strong>Bio  :</strong> <span id="bios">{{ request.user.bio }}</span>
+          </p>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary mb-3"
+          data-bs-toggle="modal"
+          data-bs-target="#edit"
+          style="margin-left: 80%"
+        >
+          edit
+        </button>
+
+        <div
+          class="modal fade"
+          id="edit"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  X
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <form action="" enctype="multipart/form-data" method='post'   >
+                  {% csrf_token %} 
+                  Profile Pic:
+                  <input
+                    type="file"
+                    name="profile_pic"
+                    id="profile_pic"
+                    
+                    required
+                   onchange='validateAndPreviewImage(event)'
+                  /><br />
+                  Bio:
+                  <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
+                
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                 
+                >
+                  Save
+                </button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+    </div>
+
+    <div class="container">
+      <div class="row">
+        {% for img in images %}
+        <div class="col-md-4" style="width:200px;height:430px">
+          <div class="card mb-4">
+            <img
+              class="card-img-top custom"
+              src="{{ img.image.url }}"
+              alt="{{ post.title }}"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal{{ img.id }}"
+              style="height: 250px;"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ img.user.username }}</h5>
+              {% comment %} <h6 class="card-text">{{ img.student.first_name }}</h6> {% endcomment %}
+              <p class="card-text">{{ img.title }}</p>
+            </div>
+            <div class="card-footer">
+              <i
+                class="fas fa-thumbs-up {% if request.user in img.likes.all %} clicked {%else%} thumbs-up {% endif %}"
+                onclick="toggleLike({{img.id}})"
+                id="likeBtn-{{ img.id }}"
+              ></i>
+              <span id="likes-{{ img.id }}">{{ img.likes.count }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal{{ img.id }}"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  {{ img.title }}
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <img
+                  src="{{ img.image.url }}"
+                  class="img-fluid"
+                  alt="{{ img.title }}"
+                />
+                <p>{{img.content}}</p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container">
+      <div class="row">
+        {% for img in article %}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            
+            <div class="card-body">
+              <h5 class="card-text">{{ img.likes.id }}</h5>
+              <h6 class="card-title">{{ img.user.username }}</h6>
+              <p class="card-text">{{ img.content |linebreaksbr  }}</p></br>
+              <p class="card-text">{{ img.created_at }}</p>
+            </div>
+            <div class="card-footer">
+              <i
+                class="fas fa-thumbs-up {% if request.user in img.likes.all %} clicked {% else %} thumbs-up {% endif %}"
+                onclick="atoggleLike({{ img.id }})"
+                id="likeBtn-{{ img.id }}"
+              ></i>
+              <span id="likes-{{ img.id }}">{{ img.likes.count }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+    
+    <script>
+      const csrfToken = "{{ csrf_token }}";
+    
+      function toggleLike(postId) {
+        var url = "toggle-like-post/" + postId + "/";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+        xhr.onload = function () {
+          var data = JSON.parse(xhr.responseText);
+          var likeBtn = document.getElementById("likeBtn-" + postId);
+          var likes = document.getElementById("likes-" + postId);
+          likes.innerHTML = data.likes;
+          if (data.is_liked) {
+            likeBtn.classList.add("clicked");
+            likeBtn.classList.remove("thumbs-up");
+          } else {
+            likeBtn.classList.add("thumbs-up");
+            likeBtn.classList.remove("clicked");
+          }
+          likes.innerHTML = data.likes;
+        };
+        xhr.send();
+      }
+
+   
+
+      function atoggleLike(postId) {
+        var url = 'toggle-like-article/' + postId + '/';
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        xhr.setRequestHeader('X-CSRFToken', csrfToken);
+        xhr.onload = function () {
+          var data = JSON.parse(xhr.responseText);
+          var likeBtn = document.getElementById('likeBtn-' + postId);
+          var likes = document.getElementById('likes-' + postId);
+          likes.innerHTML = data.likes;
+          if (data.is_liked) {
+            likeBtn.classList.add('clicked');
+            likeBtn.classList.remove('thumbs-up');
+          } else {
+            likeBtn.classList.add('thumbs-up');
+            likeBtn.classList.remove('clicked');
+          }
+          likes.innerHTML = data.likes;
+        };
+        xhr.send();
+      }
+
+
+
+      function validateAndPreviewImage(event) {
+        var input = event.target;
+        var file = input.files[0];
+        var maxSizeInBytes = 2 * 1024 * 1024; // Maximum size in bytes (1MB)
+
+        if (file.size > maxSizeInBytes) {
+          alert("File size exceeds the maximum allowed size of 2MB.");
+          input.value = ""; // Reset the file input
+          return;
+        }
+      }
+
+      
+    </script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

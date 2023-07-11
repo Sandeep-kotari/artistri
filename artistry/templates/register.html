@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static '1.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>DEUO</title>
+</head>
+<body class="login">
+    <div class="box">
+        <div class="container">
+            <div class="top-header">
+
+              {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+{% endif %}
+              
+                
+                <header>REGISTER</header>
+            </div>
+            <form action="/register/" method="POST">
+                {% csrf_token %}
+            <div class="input-field">
+                <input type="text" class="input" placeholder="name" required name="name">
+                <i class="fa fa-user-circle-o" style="font-size: 19px;display: inline-block;width: 0px;"></i>
+
+            </div>
+            
+            <div class="input-field">
+                <input type="email" class="input" placeholder="email" name="email" required value={{email}} readonly>
+                <i class="fa fa-envelope" style="font-size: 19px;display: inline-block;width: 0px;"></i>
+              
+            </div>
+
+           
+            <div class="input-field">
+                <input class="input" type="password" id="psw" name="pass1" placeholder="password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+
+                
+                <i class="fa fa-lock" style="font-size: 19px;display: inline-block;width: 0px;"></i>
+            </div>
+
+
+            <div class="input-field">
+                <input class="input" type="password" id="psw" name="pass2" placeholder="password2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+
+                
+                <i class="fa fa-lock" style="font-size: 19px;display: inline-block;width: 0px;"></i>
+            </div>
+
+
+            <div class="input-field">
+                <input type="submit" class="submit" value="submit">
+            </div>
+        </form>
+            <div class="bottom">
+                <div class="left">
+                    <input class="form" type="checkbox" value="" id="" readonly checked>
+                    <label><a href="{% static 'trm&cnd.txt' %}">terms and condition</a></label>
+                </div>
+                <div class="right">
+                    <label><a href="/login/">Already Have An ID?</a></label>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+
+
+
+
+				
+    <script>
+        var myInput = document.getElementById("psw");
+        var letter = document.getElementById("letter");
+        var capital = document.getElementById("capital");
+        var number = document.getElementById("number");
+        var length = document.getElementById("length");
+        
+        // When the user clicks on the password field, show the message box
+        myInput.onfocus = function() {
+          document.getElementById("message").style.display = "block";
+        }
+        
+        // When the user clicks outside of the password field, hide the message box
+        myInput.onblur = function() {
+          document.getElementById("message").style.display = "none";
+        }
+        
+        // When the user starts to type something inside the password field
+        myInput.onkeyup = function() {
+          // Validate lowercase letters
+          var lowerCaseLetters = /[a-z]/g;
+          if(myInput.value.match(lowerCaseLetters)) {  
+            letter.classList.remove("invalid");
+            letter.classList.add("valid");
+          } else {
+            letter.classList.remove("valid");
+            letter.classList.add("invalid");
+          }
+          
+          // Validate capital letters
+          var upperCaseLetters = /[A-Z]/g;
+          if(myInput.value.match(upperCaseLetters)) {  
+            capital.classList.remove("invalid");
+            capital.classList.add("valid");
+          } else {
+            capital.classList.remove("valid");
+            capital.classList.add("invalid");
+          }
+        
+          // Validate numbers
+          var numbers = /[0-9]/g;
+          if(myInput.value.match(numbers)) {  
+            number.classList.remove("invalid");
+            number.classList.add("valid");
+          } else {
+            number.classList.remove("valid");
+            number.classList.add("invalid");
+          }
+          
+          // Validate length
+          if(myInput.value.length >= 6) {
+            length.classList.remove("invalid");
+            length.classList.add("valid");
+          } else {
+            length.classList.remove("valid");
+            length.classList.add("invalid");
+          }
+        }
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+          // Get all the close button elements
+          var closeButtons = document.querySelectorAll(".alert .close");
+      
+          // Add an event listener to handle the click event on each close button
+          closeButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+              // Find the parent element of the close button (i.e., the alert div)
+              var alertDiv = this.parentElement;
+      
+              // Hide the alert by adding the "fade" class
+              alertDiv.classList.add("fade");
+      
+              // Remove the alert from the DOM after the fade transition
+              setTimeout(function() {
+                alertDiv.remove();
+              }, 500);
+            });
+          });
+        });
+        
+        </script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

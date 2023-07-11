@@ -1,0 +1,165 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static '2a.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .body{
+            background color: #000;
+        }
+        
+            .body{
+                background-color: #000;
+            }
+            
+            /* Additional CSS styles */
+            .koushikai {
+                background-color: #00f6ff;
+                color: #333;
+                font-family: Arial, sans-serif;
+            }
+            
+            .sumanth {
+                padding: 20px;
+                margin: 50px;
+                background-color: #1dacb1;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            
+            .form-group3, .form-group2, .form-group1 {
+                margin-bottom: 20px;
+            }
+            
+            .form-group3 label, .form-group2 label, .form-group1 label {
+                display: block;
+                font-weight: bold;
+            }
+            
+            .form-control1, .form-control-file1 {
+                width: 82%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            
+            .swathi {
+                text-align: center;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            
+            .btn:hover {
+                background-color: #45a049;
+            }
+        
+    </style>
+</head>
+<body class="koushikai">
+
+    <header>
+        
+        <nav>
+            <img class="koushik" style="height: 90px; width: 80px;" src="{% static 'My project (10).png' %}" alt="">
+            <div class="logo">
+                    <h5>ARTI<span>STRY</span></h5>
+            </div>
+            <ul class="menu">
+                <li><a href="/user_home">HOME</a></li>
+                <li><a href="/help/">HELP</a></li> 
+                
+
+                
+            </ul>
+            <div class="bar">
+                <div class="bar-1"></div>
+                <div class="bar-2"></div>
+                <div class="bar-3"></div>
+            </div>
+        </nav>
+    </header>
+ 
+        <div class="sumanth">
+        <h1>Create a new post</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="form-group3">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control1" id="title" name="title" required>
+          </div>
+          <div class="form-group2">
+            <label for="content">Content:</label>
+            <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+          </div>
+          <div class="form-group1">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control-file1" id="image" name="image" required onchange='validateAndPreviewImage(event)'>
+          </div>
+          <div class="swathi">
+          <button type="submit" class="btn btn-primary">Create Post</button>
+        </div>
+      
+        </form>
+      
+      
+    </div>
+    <script>
+        const sidenav = () => {
+            const menu = document.querySelector('.bar');
+            const nav = document.querySelector('.menu');
+            
+            menu.addEventListener('click', () => {
+               menu.classList.toggle('bar-active');
+                nav.classList.toggle('nav-active');
+            });
+        }
+        sidenav();
+
+
+        function validateAndPreviewImage(event) {
+            var input = event.target;
+            var file = input.files[0];
+            var maxSizeInBytes = 2 * 1024 * 1024; // Maximum size in bytes (1MB)
+    
+            if (file.size > maxSizeInBytes) {
+              alert("File size exceeds the maximum allowed size of 2MB.");
+              input.value = ""; // Reset the file input
+              return;
+            }
+          }
+
+
+
+    </script> 
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
